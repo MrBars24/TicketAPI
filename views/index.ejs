@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      <link rel="stylesheet" href="css/bootstrap.min.css">
+      <link rel="stylesheet" href="css/prem.mdb.min.css">
+      <link rel="stylesheet" href="css/font-awesome.min.css">
+      <link rel="stylesheet" href="css/main.css">
+      <style>
+        .cropit-preview {
+          background-color: #f8f8f8;
+          background-size: cover;
+          border: 1px solid #ccc;
+          border-radius: 3px;
+          margin-top: 7px;
+          width: 250px;
+          height: 250px;
+          margin-left: auto;
+          margin-right: auto;
+        }
+
+        .cropit-preview-image-container {
+          cursor: move;
+        }
+
+        .image-size-label {
+          margin-top: 10px;
+        }
+
+        input, .export {
+          display: block;
+        }
+
+        button {
+          margin-top: 10px;
+        }
+      </style>
+      <title><%= title %></title>
+  </head>
+  <body class="fixed-sn grey-skin">
+    <header>
+      <ul id="slide-out" class="side-nav custom-scrollbar ps-container ps-theme-default">
+          <!-- Logo -->
+          <li>
+              <div class="logo-wrapper sn-ad-avatar-wrapper">
+                  <img src="" class="img-fluid img-circle">
+                  <div class="rgba-stylish-strong">
+                      <p class="user white-text">Gerald Austria
+                          <br>organizer@gmail.com</p>
+                  </div>
+              </div>
+          </li>
+          <!--/. Logo -->
+          <!-- Side navigation links -->
+          <li>
+              <ul class="collapsible collapsible-accordion">
+                  <li><a href="<?= site_url('user'); ?>" class="collapsible-header waves-effect arrow-r"><i class="fa fa-home"></i> Home </a> </li>
+                  <li><a href="<?= site_url('user/profile'); ?>" class="collapsible-header waves-effect arrow-r"><i class="fa fa-user"></i> Profile </a> </li>
+                  <li><a class="collapsible-header waves-effect arrow-r"><i class="fa fa-calendar"></i> Events </a> </li>
+                  <li><a class="collapsible-header waves-effect arrow-r"><i class="fa fa-wrench "></i> Settings</a></li>
+                  <li><a href="<?= site_url('user/logout'); ?>" class="collapsible-header waves-effect arrow-r"><i class="fa fa-sign-out "></i> Logout</a> </li>
+              </ul>
+          </li>
+      </ul>
+      <!--Navbar-->
+      <nav class="navbar navbar-fixed-top scrolling-navbar double-nav">
+          <!-- Breadcrumb-->
+          <div class="pull-left">
+              <a href="" data-activates="slide-out" class="button-collapse">
+                  <i class="fa fa-bars"></i>
+              </a>
+          </div>
+          <div class="breadcrumb-dn">
+              <p>MPower</p>
+          </div>
+          <ul class="nav navbar-nav pull-right">
+              <li class="nav-item">
+                  <a class="nav-link waves-effect waves-light" href="#" data-toggle="modal" data-target="#filterModal" type="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-filter fa-lg"></i>Filter</a>
+              </li>
+          </ul>
+      </nav>
+  </header>
+  <br><br><br>
+  <a id="upload" class="btn btn-primary btn-rounded">Upload</a>
+    <% include ./modal/crop %>
+    <!-- <h1><%= title %></h1>
+    <p>Welcome to <%= title %></p>
+    <form method="post" id="myform">
+          <input type="text" name="uname">
+          <input type="text" name="uemail">
+          <input type="submit" value="Submit">
+      </form> -->
+    <script src="js/jquery-2.2.3.min.js"></script>
+    <script src="js/jquery.cropit.js"></script>
+    <script src="js/tether.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/prem.mdb.min.js"></script>
+    <script>
+      $(document).ready(function(){
+        $(".button-collapse").sideNav();
+          var el = document.querySelector('.custom-scrollbar');
+          Ps.initialize(el);
+      })
+      $('.cropit-preview').on('click',function(){
+        if(!$('.choose').hasClass('hide')){
+          $('.cropit-image-input').trigger('click');
+        }
+      })
+      $('input[type="file"]').change(function(){
+          $('.choose').addClass('hide');
+      });
+      $(function() {
+        $('.image-editor').cropit();
+      })
+      $('#upload').click(function(){
+        $('#myModal').modal({
+          show:true,
+          backdrop: 'static'
+        })
+      })
+
+      $('.btn-save').click(function() {
+        $('#submit').trigger('submit')  
+      })
+      $('#avatar-frm').on("submit", function(e){
+        e.preventDefault();
+        var img = $('.image-editor').cropit('export');
+        var frm = new FormData(this);
+        frm.append('imgdata',img)
+        $.ajax({
+        url: "http://localhost:8080/upload/avatar",
+        type: "POST",
+        data: frm,
+        contentType: false,
+        cache: false,
+        processData:false,
+        success: function(data){
+          console.log(data);
+        }
+      });
+    });
+    </script>
+  </body>
+</html>

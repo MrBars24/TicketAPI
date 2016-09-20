@@ -1,0 +1,38 @@
+html,
+body,
+header,
+.view {
+    height: 100%;
+}
+/* Navigation*/
+
+.navbar {
+    background-color: transparent !important;
+}
+
+.top-nav-collapse {
+    background-color: #33b5e5 !important;
+}
+#home{
+    margin-top: 100px;
+}
+@media only screen and (max-width: 768px) {
+    .navbar {
+        background-color: #33b5e5 !important;
+    }
+    #home{
+        margin-top: 250px;
+        margin-bottom: 50px;
+    }
+    .register-block{
+        margin-top: 20px;
+    }
+}
+/*Intro*/
+.view {
+    background: url("../img/cover.jpg")no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}

@@ -1,0 +1,29 @@
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <!--Content-->
+        <div class="modal-content">
+            <!--Body-->
+            <div class="modal-body">
+                <form id="avatar-frm" class="image-editor" enctype="multipart/form-data">
+                 <input type="file" name="upl" class="cropit-image-input" hidden>
+                  <div class="cropit-preview flex-center">
+                    <h1 class="choose">choose file</h1>
+                  </div>
+                  <div class="image-size-label">
+                    Resize image
+                  </div>
+                  <div class="range-field">
+                      <input type="range" class="cropit-image-zoom-input" name="zoom">
+                  </div>
+                  <input type="submit" id="submit" hidden>
+                </form>
+            </div>
+            <!--Footer-->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary btn-save">Save changes</button>
+            </div>
+        </div>
+        <!--/.Content-->
+    </div>
+</div>
